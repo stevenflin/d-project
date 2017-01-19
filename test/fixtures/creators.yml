@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  propic: MyString
+  link: MyString
+  user: one
+
+two:
+  name: MyString
+  propic: MyString
+  link: MyString
+  user: two

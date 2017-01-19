@@ -1,0 +1,185 @@
+<div class='box'>
+	<!-- Brand/Agency View -->
+	<% if @company %>
+		<div class='co-header'>
+			<h1><%= @company.name %></h1>
+			<p><%= @company.description%></p>
+		</div>
+
+		<h2>Creators</h2>
+		<div class='add-creator'>
+		<%= form_for(:user, :url => {:action => 'add'}) do |f| %>
+			<label>Add Creator: </label>
+			<%= f.url_field :URL, :placeholder => "Enter Youtube/Twitter URL (ex. https://youtube.com/smosh)" %>
+			<%= submit_tag("Add") %>
+			<div><%= notice %></div>
+		<% end %>
+		</div>
+		
+		<% if @company.creators.length > 0 %>
+			<% @company.creators.each do |creator| %>
+			<div class='creator'>
+				<img src=<%= creator.propic %> width='10%' />
+				<p><%= creator.name %> (<%= creator.id %>)</p>
+				<a href=<%= creator.link %>><%= creator.link %></a>
+			</div>
+			<% end %>
+		<% else %>
+			<div class='no-creator'>
+				<p>You are currently not represented by any creators!</p>
+			</div>
+		<% end %>
+
+	<!-- Creator View -->
+	<% elsif @creator %>
+		<div class='header'>
+			<img src=<%= @creator.propic %> width='15%'/>
+			<h1><%= @creator.name %></h1>
+			<a href=<%= @creator.link%>><%= @creator.link %></a>
+		</div>
+		<div class='agency-box'>
+			<h2>Agencies</h2>
+			<% if @creator.agencies.length > 0 %>
+				<% @creator.agencies.each do |agency| %>
+				<div class='agency'>
+					<h3>Name: <%= agency.name %></h3>
+					<p>Description: <%= agency.description %></p>
+				</div>
+				<% end %>
+			<% else %>
+				<div class='no-agency'>
+					<p>You currently do not represent any agencies!</p>
+				</div>
+			<% end %>
+		</div>
+		<div class='brand-box'>
+			<h2>Brands</h2>
+			<% if @creator.brands.length > 0 %>
+				<% @creator.brands.each do |brand| %>
+				<div class='brand'>
+					<h3>Name: <%= brand.name %></h3>
+					<p>Description: <%= brand.description %></p>
+				</div>
+				<% end %>
+			<% else %>
+				<div class='no-brand'>
+					<p>You currently do not represent any brands!</p>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+
+	<%= form_tag('/user', :method => 'get') do %>
+	  	<%= select_tag 'user_id', options_for_select(@users.collect{ |u| [u.name, u.id] }, @selected) %>
+	  	<%= submit_tag("Switch User") %>
+	<% end %>
+	<a href='/'>Home</a>
+</div>
+
+<style>
+
+	input {
+		border: none;
+		height: 25px;
+		color: white;
+		background-color: #3A4761;
+		width: 75px;
+	}
+
+	img {
+		float: left;
+		margin-right: 10px;
+	}
+
+	h1 {
+		padding-top: 15px;
+	}
+
+	h2 {
+		margin: 0;
+	}
+
+	h3 {
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+	}
+
+	select {
+		height: 25px;
+		color: #3A4761;
+		-webkit-appearance: none;
+		-webkit-border-radius: 0px;
+	}
+
+	#user_URL {
+		height: 25px;
+		width: 50%;
+		background-color: white;
+		border: 1px solid #3A4761;
+		color: #3A4761;
+	}
+
+	.box {
+		border: 1px solid #3A4761;
+		margin: 100px 250px;
+		padding: 25px 75px;
+	}
+
+	.header {
+		text-align: left;
+		padding: 0 30px;
+		margin-bottom: 50px;
+	}
+
+	.co-header {
+		border-bottom: 1px solid #3A4761;
+		padding-bottom: 25px;
+		margin-bottom: 25px;
+	}
+
+	.agency-box {
+		padding-top: 5px;
+		border-top: 1px solid #3A4761;
+	}
+
+	.brand-box {
+		padding-top: 5px;
+		border-top: 1px solid #3A4761;
+	}
+
+	.agency {
+		padding: 10px 50px;
+		text-align: left;
+	}
+
+	.brand {
+		padding: 10px 50px;
+		text-align: left;
+	}
+
+	.no-agency {
+		padding: 10px 50px;
+	}
+
+	.no-brand {
+		padding: 10px 50px;
+	}
+
+	.add-creator {
+		margin-bottom: 5px;
+	}
+
+	.creator {
+		padding: 10px 45px;
+		text-align: left;
+		margin-bottom: 40px;
+	}
+
+	.no-creator {
+		padding: 10px 50px;
+	}
+
+</style>

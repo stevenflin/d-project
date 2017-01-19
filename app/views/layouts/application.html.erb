@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dovetale</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
+
+<style>
+	body {
+		text-align: center;
+		font-family: "Century Gothic";
+		color: #3A4761;
+	}
+
+	h1 {
+		margin: 0 0 5px 0;
+	}
+</style>
